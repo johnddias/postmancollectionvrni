@@ -1,0 +1,5955 @@
+{
+  "info": {
+    "name": "vRealize Network Insight API Reference",
+    "_postman_id": "0c0c79a0-1545-d4c0-5081-f7406c653936",
+    "description": "vRealize Network Insight API Reference",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "_postman_id": "f6929364-89ae-766c-3182-d6d7dce8e7e3",
+      "name": "auth",
+      "description": "Folder for auth",
+      "item": [
+        {
+          "_postman_id": "fe0b4829-674a-36ef-f3de-7e6f9bc0fdb5",
+          "name": "Create an auth token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var jsonData = pm.response.json();",
+                  "",
+                  "pm.environment.set(\"token\", jsonData.token);",
+                  ""
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"username\":\"{{user}}\",\n\t\"password\":\"{{pass}}\",\n\t\"domain\": {\n\t\t\"domain_type\": \"LOCAL\"\n\t}\n}"
+            },
+            "url": "https://{{address}}/api/ni/auth/token",
+            "description": "<html><body> vRealize Network Insight supports token based authentication.Tokens are non-modifiable identifiers returned by the system when the user has successfully authenticated using valid credentials. Token expires after expiry time returned in the response. All API requests must provide the auth token in Authorization header in following format.<br> Authorization &#58; NetworkInsight {token} <br> If a token is invalid or expired, 401-Unauthorized error gets returned in the response of the API request. </body></html>"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "29749e21-ad1f-8471-7d07-595a43ee2956",
+          "name": "Delete an auth token.",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/auth/token",
+            "description": "Deletes the auth token provided in Authorization header.\nDeleting an expired or invalid token will result in 401 Unauthorized error."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "c1954abd-6910-a72b-a81f-e93311ac0d35",
+      "name": "infra",
+      "description": "Folder for infra",
+      "item": [
+        {
+          "_postman_id": "3f519751-28b3-06f1-04ec-a101afb5ed92",
+          "name": "List nodes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/infra/nodes",
+            "description": "Get list of infrastructure nodes. Only admin users can retrieve this information."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "cd7385d4-dec1-7cb9-5dd6-d277eb638541",
+          "name": "Show node details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/infra/nodes/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "infra",
+                "nodes",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Get details of infrastructure nodes. Only admin users can get this information. The proxy id is\nrequired for adding a data source for selecting appropriate proxy node to add the data source."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "9251181d-1cde-a458-a288-6f4ba374be3b",
+      "name": "info",
+      "description": "Folder for info",
+      "item": [
+        {
+          "_postman_id": "6116fbc0-7322-9234-66df-c8f323046fb3",
+          "name": "Show version info",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/info/version",
+            "description": "Show version info"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "4fea099d-6cc0-5d9f-ff8e-914732f1c80a",
+      "name": "data-sources",
+      "description": "Folder for data-sources",
+      "item": [
+        {
+          "_postman_id": "9325144e-e63f-3737-91ac-8cc4a1c34e98",
+          "name": "List vCenter data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "NetworkInsight {{token}}"
+              }
+            ],
+            "body": {},
+            "url": "https://{{address}}/api/ni/data-sources/vcenters",
+            "description": "List vCenter data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ee6478f4-d655-fc61-bbdb-059a921fb4b5",
+          "name": "Create a vCenter data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/vcenters",
+            "description": "Add a vcenter data source. User must provide one of ip or fqdn field in the request body.\nAppropriate proxy id is retrieved from infra/nodes URL to select the proxy node."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e1f7654d-cbce-1ba7-7287-9d621ab243bd",
+          "name": "Show vCenter data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/vcenters/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "vcenters",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show vCenter data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c170758c-3277-032c-356f-afe1f745c6d9",
+          "name": "Update a vCenter data source.",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/vcenters/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "vcenters",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update a vcenter data source. Only nickname, notes and credentials can be updated."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "285f8f86-05a4-cbb3-e50a-d334788124d4",
+          "name": "Delete a vCenter data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/vcenters/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "vcenters",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete a data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "fd509bd9-3770-3455-99ca-100b5650b486",
+          "name": "Enable a vCenter data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/vcenters/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "vcenters",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable a vCenter data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "17a39973-3559-d279-4d0f-afc667a0a608",
+          "name": "Disable a vCenter data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/vcenters/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "vcenters",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable a vCenter data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "737d69b1-fe2a-46c3-ad6b-89df24d599b2",
+          "name": "List cisco switch data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/cisco-switches",
+            "description": "List cisco switch data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "38907698-937b-62dd-eb9f-ac788a3153c7",
+          "name": "Create a cisco switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/cisco-switches",
+            "description": "Add cisco switch as data source. User must provide one of ip or fqdn field in the request body.\nAppropriate proxy id is retrieved from infra/nodes URL to select the proxy node."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "089405df-cf28-3fa2-dfad-d7149652636a",
+          "name": "Show cisco switch data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/cisco-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "cisco-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show cisco switch data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2af72886-8456-3980-cafa-edcdb744c1c0",
+          "name": "Update a cisco switch data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/cisco-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "cisco-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update a cisco switch data source. Only credentials, nickname and notes can be updated."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "7945adbe-7224-cf73-545e-fa53778d2f02",
+          "name": "Delete a cisco switch data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/cisco-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "cisco-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete a cisco switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a3b04d6e-3bb1-a79a-e942-f35743134c94",
+          "name": "Enable a cisco switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/cisco-switches/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "cisco-switches",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable a cisco switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c3b50519-4e22-1b66-fccc-4ec370dabc19",
+          "name": "Disable a cisco switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/cisco-switches/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "cisco-switches",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable a cisco switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e6263a4d-d2e1-e1fd-cebd-1bb734df70e4",
+          "name": "Show snmp config for cisco switch data source",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/cisco-switches/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "cisco-switches",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show snmp config for cisco switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "3682b6a8-994e-5e6a-9916-515c720ad554",
+          "name": "Update snmp config for cisco switch data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/cisco-switches/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "cisco-switches",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update snmp config for cisco switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "7e5618cf-f0d8-9182-f7f6-3d3b1b23ebf4",
+          "name": "List dell switch data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/dell-switches",
+            "description": "List dell switch data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "bbc95640-be18-0bb5-23b6-5b86144f8d73",
+          "name": "Create a dell switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/dell-switches",
+            "description": "Add a dell switch as data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "27ea4bc0-4b34-1ac5-a636-aa141294806e",
+          "name": "Show dell switch data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/dell-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "dell-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Get a dell switch data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "3759e18e-7820-41f8-a2c2-b7b96006c241",
+          "name": "Update a dell switch data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/dell-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "dell-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update a dell switch data source. Only credentials, nickname and notes can be updated"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ad230f45-6374-1731-7bcc-eb046746eccc",
+          "name": "Delete a dell switch data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/dell-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "dell-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete a data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "959914a6-49a1-e414-c8ac-a8be4dd70fb6",
+          "name": "Enable a dell switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/dell-switches/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "dell-switches",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable a dell switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6fcbd0c6-4e67-856e-e770-f700dd83d23e",
+          "name": "Disable a dell switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/dell-switches/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "dell-switches",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable a dell switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e9239bdd-88ef-d0de-f8ce-d93dd610e1e4",
+          "name": "Show snmp config for dell switch data source",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/dell-switches/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "dell-switches",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show snmp config for dell switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9ab381e4-b37d-a0dc-a4f0-e9797a289d82",
+          "name": "Update snmp config for dell switch data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/dell-switches/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "dell-switches",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update snmp config for dell switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c79a815c-f500-160f-b889-a91aebd150e1",
+          "name": "List brocade switch data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/brocade-switches",
+            "description": "List brocade switch data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "31821746-e14d-d4be-16f2-a2dfa2cb3171",
+          "name": "Create a brocade switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/brocade-switches",
+            "description": "Add brocade switch as a data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c1a0e639-22f0-39b6-325d-f279666045be",
+          "name": "Show brocade switch data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/brocade-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "brocade-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show brocade switch data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d5d8b8c4-e6ec-77b1-4593-e3116560dc3a",
+          "name": "Update a brocade switch data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/brocade-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "brocade-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update a brocade switch data source. Only credentials, nickname and notes can be updated."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "05f1c3c1-3985-1abd-cf38-7ffb347454a7",
+          "name": "Delete a brocade switch data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/brocade-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "brocade-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete a brocade switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "fba66293-167c-0293-3cc2-2bc18b8e86c7",
+          "name": "Enable a brocade switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/brocade-switches/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "brocade-switches",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9bfaeee6-4ff4-e39e-c79c-22f774e6c69e",
+          "name": "Disable a brocade switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/brocade-switches/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "brocade-switches",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "fb2b6c74-3099-425a-d15c-d10f5ffb662f",
+          "name": "Show snmp config for brocade switch data source",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/brocade-switches/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "brocade-switches",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show snmp config for brocade switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "f78b58a1-a8b3-d69a-b5d0-03d5da480393",
+          "name": "Update snmp config for brocade switch data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/brocade-switches/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "brocade-switches",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update snmp config for brocade switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "11482aa8-4a6b-ec04-63b3-206e360f5dee",
+          "name": "List juniper switch data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/juniper-switches",
+            "description": "List juniper switch data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "cfb9486a-e013-a958-aa05-b1b82fe0ca38",
+          "name": "Add a juniper switch as data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/juniper-switches",
+            "description": "Add switch Datasource"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "4b0cc3bc-a2fb-f313-4608-43a4abcde205",
+          "name": "Show juniper switch data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/juniper-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "juniper-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show juniper switch data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "fbed65d5-e8e6-0d18-fc5c-6d6a0c08e3ab",
+          "name": "Update a juniper switch data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/juniper-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "juniper-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update a juniper switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8cc8d4cd-5df0-bf79-f7ab-cb266bb665a2",
+          "name": "Delete a juniper switch data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/juniper-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "juniper-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete a juniper switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "65888378-d863-8061-2085-76cc24781fe4",
+          "name": "Enable a juniper switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/juniper-switches/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "juniper-switches",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable a juniper switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d90b23fe-82ac-c414-1899-777dd4e34baf",
+          "name": "Disable a juniper switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/juniper-switches/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "juniper-switches",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable a juniper switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "836604c9-6166-b09d-5dfb-90fa72e2fb12",
+          "name": "Show snmp config for juniper switch data source",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/juniper-switches/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "juniper-switches",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show snmp config for juniper switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9952a400-1aa8-5bf7-ab1b-d633b84cd598",
+          "name": "Update snmp config for a juniper switch data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/juniper-switches/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "juniper-switches",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update snmp config for a juniper switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "5d938cc3-6796-b147-d86f-d99ef7434ad1",
+          "name": "List arista switch data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/arista-switches",
+            "description": "List arista switch data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "15777b0c-4cb6-7d7b-aa8a-97a67a0a7e56",
+          "name": "Create an arista switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/arista-switches",
+            "description": "Add arista switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "af1f7f22-4fb3-e7fe-831b-2541fc9ae5c8",
+          "name": "Show arista switch data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/arista-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "arista-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show arista switch data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "0dcecc9f-f2f3-99d5-9de5-c9522a5df2ca",
+          "name": "Update an arista switch data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/arista-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "arista-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update an switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d6af577d-eba2-e091-b139-fdef9fb497eb",
+          "name": "Delete an arista switch data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/arista-switches/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "arista-switches",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete an arista switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "cdb48686-4ff2-703d-3f03-7e1af0f02a73",
+          "name": "Enable an arista switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/arista-switches/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "arista-switches",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable an arista switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6f06e8b2-d585-b62b-2a36-16dd71a2155c",
+          "name": "Disable an arista switch data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/arista-switches/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "arista-switches",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable an arista switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "3144fb11-661b-a825-85e5-a60208519249",
+          "name": "Show snmp config for arista switch data source",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/arista-switches/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "arista-switches",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show snmp config for arista switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "fdf222e2-94b1-8833-e703-1ef30364cf06",
+          "name": "Update snmp config for arista switch data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/arista-switches/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "arista-switches",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update snmp config for arista switch data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "fa9b7d57-6cb7-b926-7127-2e5eecf7a273",
+          "name": "List checkpoint firewall data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/checkpoint-firewalls",
+            "description": "List checkpoint firewall data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "477b8ef3-b59e-d4fb-9160-8cdef127be2d",
+          "name": "Create a checkpoint firewall",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/checkpoint-firewalls",
+            "description": "Add checkpoint firewall as data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "195b9d26-99a3-2b19-16e8-8f298e58e999",
+          "name": "Show checkpoint firewall data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/checkpoint-firewalls/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "checkpoint-firewalls",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show checkpoint firewall data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "71e128b4-fe53-33f7-0c18-c54cbcb09ef8",
+          "name": "Update a checkpoint firewall data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/checkpoint-firewalls/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "checkpoint-firewalls",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update a checkpoint firewall data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "62fc8cf9-82a6-7952-63b7-31ab5deda93b",
+          "name": "Delete a checkpoint firewall data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/checkpoint-firewalls/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "checkpoint-firewalls",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete a checkpoint firewall data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "24297861-5a6e-d962-7155-2fff6c24f4b6",
+          "name": "Enable a checkpoint firewall data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/checkpoint-firewalls/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "checkpoint-firewalls",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable a checkpoint firewall data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "45d5890d-0959-83b5-fe33-59502493556d",
+          "name": "Disable a checkpoint firewall data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/checkpoint-firewalls/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "checkpoint-firewalls",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable a checkpoint firewall data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2fe8bf39-571b-1357-b677-f0b3b883a30f",
+          "name": "List panorama firewall data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/panorama-firewalls",
+            "description": "List panorama firewall data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9e0bc886-b162-b620-a6cf-342267e25449",
+          "name": "Create panorama firewall data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/panorama-firewalls",
+            "description": "Add panorama firewall as data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9556fd6a-495a-b2f0-1440-e9697f77c831",
+          "name": "Show panorama firewall data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/panorama-firewalls/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "panorama-firewalls",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show panorama firewall data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "be995070-4a42-b762-1eae-2ef02b28b2dd",
+          "name": "Update a panorama firewall data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/panorama-firewalls/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "panorama-firewalls",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update a panorama firewall data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "de0d1c7d-936e-ab78-5387-e7706b162b63",
+          "name": "Delete a panorama firewall data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/panorama-firewalls/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "panorama-firewalls",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete a panorama firewall data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "0ccce713-7572-a099-48fa-8ca95b1c5848",
+          "name": "Enable a panorama firewall data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/panorama-firewalls/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "panorama-firewalls",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable a panorama firewall data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "277d3213-ff11-3c47-f766-589ec2afbec7",
+          "name": "Disable a panorama firewall data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/panorama-firewalls/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "panorama-firewalls",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable a panorama firewall data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c6e21b4d-2fb8-f7db-978e-95cda28b51a4",
+          "name": "List ucs manager data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/ucs-managers",
+            "description": "List ucs manager data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "eaf0a092-a473-4d22-c9ac-0db07f25c18c",
+          "name": "Create a ucs manager data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/ucs-managers",
+            "description": "Add a ucs manager as data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "dec8523e-f7ee-b119-e376-a1fe7feedbbf",
+          "name": "Show ucs manager data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/ucs-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "ucs-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show ucs manager data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d03247ea-e6ae-ecc5-b70d-4d4d13eff00c",
+          "name": "Update a ucs manager data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/ucs-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "ucs-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update a ucs manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "7c0afb8b-620d-2c66-52e7-8a07a0a640ba",
+          "name": "Delete a ucs manager data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/ucs-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "ucs-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete a ucs manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "13b3116c-c9da-b648-861c-b42cc408d250",
+          "name": "Enable a ucs manager data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/ucs-managers/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "ucs-managers",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable a ucs manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b17e53ee-ef28-702f-6f39-e7d441dc29f3",
+          "name": "Disable a ucs manager data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/ucs-managers/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "ucs-managers",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable a ucs manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "eb0c88c4-a761-7fe7-25ec-e91438cdb780",
+          "name": "Show snmp config for ucs fabric interconnects",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/ucs-managers/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "ucs-managers",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show snmp config for ucs fabric interconnects"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "58d7c23e-8c77-14d8-73c6-651bc49af24e",
+          "name": "Update snmp config for ucs fabric interconnects",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/ucs-managers/:id/snmp-config",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "ucs-managers",
+                ":id",
+                "snmp-config"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update snmp config for ucs fabric interconnects"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a65ec7cd-82c1-e4e8-a8f2-5efd70913404",
+          "name": "List hpvc manager data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/hpvc-managers",
+            "description": "List hpvc manager data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "67a0fdc5-4e42-aee7-5a34-a7eb0f94af1c",
+          "name": "Create a hpvc manager data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/hpvc-managers",
+            "description": "Add hpvc manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "5f7b5e9a-1e20-7f7b-ac2f-cbadafaff47c",
+          "name": "Show hpvc data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/hpvc-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "hpvc-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show hpvc data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "970cb082-50a1-2d27-09c2-180deaa2b7ec",
+          "name": "Update a hpvc manager data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/hpvc-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "hpvc-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update a hpvc manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "4ab48988-f598-a177-02fe-e7f64ffca387",
+          "name": "Delete a hpvc manager data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/hpvc-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "hpvc-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete a hpvc manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "12b6f75b-64f9-9ba8-95f9-e888cf90186a",
+          "name": "Enable a hpvc manager data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/hpvc-managers/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "hpvc-managers",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable a hpvc manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c1074a8b-f43e-4bd1-dae2-b735753d8c46",
+          "name": "Disable a hpvc manager data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/hpvc-managers/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "hpvc-managers",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable a hpvc manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "be6c2380-c8eb-e0ca-3ccb-5f933938d90c",
+          "name": "List hp oneview manager data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/hpov-managers",
+            "description": "List hp oneview manager data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "5fbc2ca3-2259-f48d-5d14-fbbe50a526cb",
+          "name": "Create a hp oneview manager data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/hpov-managers",
+            "description": "Add a hp oneview manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ab7f418c-caff-7d7b-e6ff-451abf644b07",
+          "name": "Show hp oneview data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/hpov-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "hpov-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show hp oneview data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c4a42190-786f-837f-cbf0-5fe18fcd429e",
+          "name": "Update a hp oneview data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/hpov-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "hpov-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update a hp oneview data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "eccb831c-6aaf-e44c-ef97-6ffc012656a4",
+          "name": "Delete a hp oneview data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/hpov-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "hpov-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete a hp oneview data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "fa78fa38-af4a-5160-b9b1-5be949f2076b",
+          "name": "Enable a hp oneview data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/hpov-managers/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "hpov-managers",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable a hp oneview data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a1c0cd24-e4bc-41de-8440-b8e87dedbe6e",
+          "name": "Disable a hp oneview data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/hpov-managers/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "hpov-managers",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable a hp oneview data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "4eca3bff-14b5-e4c1-6234-c9e9b580c470",
+          "name": "List nsx-v manager data sources",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://vrni.example.com/api/ni/data-sources/nsxv-managers",
+            "description": "List nsx-v manager data sources"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "054694e4-9b73-f1e9-f41b-24653491a2ee",
+          "name": "Create an nsx-v manager data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/data-sources/nsxv-managers",
+            "description": "Add an nsx-v manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "5d094350-a7d7-b786-cae2-5dddc5beacbd",
+          "name": "Show nsx-v manager data source details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/nsxv-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "nsxv-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show nsx-v manager data source details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1628bf2b-ddbf-f303-4356-3a326d0ed4b3",
+          "name": "Update an nsx-v manager data source",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/nsxv-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "nsxv-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update an nsx-v manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "0de0163f-1ae0-3846-d73c-cc844157ea8b",
+          "name": "Delete an nsx-v manager data source",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/nsxv-managers/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "nsxv-managers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Delete an nsx-v manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c18aa9d4-c38c-b5bb-e9ca-648ccb43c2ea",
+          "name": "Enable an nsx-v manager data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/nsxv-managers/:id/enable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "nsxv-managers",
+                ":id",
+                "enable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Enable an nsx-v manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "31a5fed9-8f26-72b2-0ca2-f69ac25f3264",
+          "name": "Disable an nsx-v manager data source",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/nsxv-managers/:id/disable",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "nsxv-managers",
+                ":id",
+                "disable"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Disable an nsx-v manager data source"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "80ccbb73-d3e0-c362-0d2e-f1da89cdaa02",
+          "name": "Show nsx controller-cluster details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/nsxv-managers/:id/controller-cluster",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "nsxv-managers",
+                ":id",
+                "controller-cluster"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show nsx controller-cluster details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6b8871de-188a-f1b2-fdf4-84d36be6db9c",
+          "name": "Update nsx controller-cluster details",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/data-sources/nsxv-managers/:id/controller-cluster",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "data-sources",
+                "nsxv-managers",
+                ":id",
+                "controller-cluster"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Update nsx controller-cluster details"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "61b68703-e8e6-34af-d1e7-d589bc8aef90",
+      "name": "entities",
+      "description": "Folder for entities",
+      "item": [
+        {
+          "_postman_id": "ad6c3c14-ec9a-dad6-3ca9-c7fb87118130",
+          "name": "List problems",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/problems?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "problems"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List problem events."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ae92ae74-8b13-c165-f19c-5cc1befb1451",
+          "name": "Show problem details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/problems/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "problems",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show problem event details."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "faa42714-86a5-5948-a41f-2d056eea208e",
+          "name": "List vms",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/vms?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "vms"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List vms"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "fadeb7f6-2ef3-7d8c-4441-645e157fd980",
+          "name": "Show vm details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/vms/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "vms",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show vm details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "62d1c8d3-9d89-ef2a-7290-135ac97d80eb",
+          "name": "List vnics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/vnics?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "vnics"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List vnics"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a6a1b6c8-b05a-06d8-fc59-d1fcb38668cd",
+          "name": "Show vnic details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/vnics/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "vnics",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show vnic details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "68bbb79f-30d7-fe0d-05f7-976e8fc7493e",
+          "name": "List hosts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/hosts?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "hosts"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List hosts"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6f65d049-2fc2-9852-a181-168b51a5ecf8",
+          "name": "Show host details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/hosts/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "hosts",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show host details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "101ca578-6f1d-3844-7884-187ff481b59c",
+          "name": "List clusters",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/clusters?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "clusters"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List clusters"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "3306ac9b-fe7b-f95e-6ae5-0b5f2b5c2246",
+          "name": "Show cluster details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/clusters/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "clusters",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show cluster details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "54a23bdc-1b55-7465-05f2-fbf2cba20356",
+          "name": "List vCenter datacenters",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/vc-datacenters?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "vc-datacenters"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List vCenter datacenters"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "94b2a207-83ae-d524-f5d5-856467ba6f51",
+          "name": "Show vCenter datacenter details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/vc-datacenters/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "vc-datacenters",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show vCenter datacenter details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "171da7a4-17a1-6ff4-28d0-b1502abe3584",
+          "name": "List folders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/folders?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "folders"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List folders"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9a0dbebc-8778-73f3-0163-713c51643c10",
+          "name": "Show folder details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/folders/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "folders",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show folder details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "fbebcc5b-6280-652a-aef0-338340bcf249",
+          "name": "List datastores",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/datastores?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "datastores"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List datastores"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6ed8dfe7-9e7d-6cd7-54a7-27a06ca57914",
+          "name": "Show datastore details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/datastores/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "datastores",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show datastore details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e9d0c0a7-d40f-1ccc-e0de-b61a0d08f097",
+          "name": "List vmknics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/vmknics?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "vmknics"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List vmknics"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e8e1b3d1-0cdf-be33-e6df-fe2ae6d548b4",
+          "name": "Show vmknic details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/vmknics/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "vmknics",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show vmknic details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "dad427de-92da-3fea-72a5-bace98690aaa",
+          "name": "List layer2 networks",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/layer2-networks?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "layer2-networks"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List layer2 networks"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8d2edaf9-9c30-b675-8a71-9413c1e5a187",
+          "name": "Show layer2 network details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/layer2-networks/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "layer2-networks",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show layer2 network details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "29d8bd56-89fe-d229-d24d-542aa9cd7e08",
+          "name": "List ip sets",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/ip-sets?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "ip-sets"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List ip sets"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e4aea221-84de-5143-ea6f-19fe3bb72b92",
+          "name": "Show ip set details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/ip-sets/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "ip-sets",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show ip set details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "870902c1-7afa-04a3-146a-5c32aa9e0351",
+          "name": "List flows",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/flows?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "flows"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List flows"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "8f03aeae-592d-39c8-d612-7642aac88df3",
+          "name": "Show flow details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/flows/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "flows",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show flow details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ae605353-6e4d-10d8-8b9e-4022c766e1bb",
+          "name": "List security groups",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/security-groups?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "security-groups"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List security groups"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a627e67b-fd4b-a883-a20c-ec4173a15968",
+          "name": "Show security group details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/security-groups/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "security-groups",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show security group details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "6116b2d7-f467-3c57-0d12-0ee68af7adef",
+          "name": "List security tags",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/security-tags?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "security-tags"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List security tags"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "feed17bc-c279-f361-874c-b570de1e7ae6",
+          "name": "Show security tag details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/security-tags/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "security-tags",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show security tag details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "90111369-8aed-6bac-93bc-24f815bab6bc",
+          "name": "List firewall rules",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/firewall-rules?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "firewall-rules"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List firewall rules"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "c4d08987-259c-927a-e1fc-c34f92ed7ca6",
+          "name": "Show firewall rule details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/firewall-rules/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "firewall-rules",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show firewall rule details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e9b086fc-0daa-40e7-7800-a452216e2aef",
+          "name": "List firewalls",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/firewalls?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "firewalls"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List firewalls"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d4cbb7ed-1170-e3b7-b92c-4e6c06fdc278",
+          "name": "Show firewall details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/firewalls/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "firewalls",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show firewall details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ffc8c181-97d2-9b6f-a2e8-52063370fdee",
+          "name": "List services",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/services?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "services"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List services"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "d3a699e3-c737-25e3-678f-535b0f43e0c5",
+          "name": "Show service details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/services/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "services",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show service details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "1bf947ea-d49d-5aed-624c-82ca1aa52e44",
+          "name": "List service groups",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/service-groups?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "service-groups"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List service groups"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "825b4a09-dcf8-b36d-cf1c-10ddfed53a6a",
+          "name": "Show service group details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/service-groups/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "service-groups",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show service group details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9e2867cb-1075-823a-7169-f8bd6094e1f3",
+          "name": "List vCenter managers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/vcenter-managers?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "vcenter-managers"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List vCenter managers"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "26f0e819-4d83-fa32-7084-d112ee7fd1d9",
+          "name": "Show vCenter manager details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/vcenter-managers/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "vcenter-managers",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show vCenter manager details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "28dfdebb-ba65-7ed1-e0c5-8c703381b98f",
+          "name": "List nsx managers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/nsx-managers?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "nsx-managers"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List nsx managers"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "a5345809-0c4f-ed23-e55c-ec7e1470ede2",
+          "name": "Show nsx manager details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/nsx-managers/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "nsx-managers",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show nsx manager details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9ffd43cf-a982-c49f-f840-ec34d4271727",
+          "name": "List distributed virtual switches",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/distributed-virtual-switches?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "distributed-virtual-switches"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List distributed virtual switches"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "dc68cab6-6b70-fcf3-a595-1e8d92c5859a",
+          "name": "Show distributed virtual switch details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/distributed-virtual-switches/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "distributed-virtual-switches",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show distributed virtual switch details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "81cf35c5-3a5a-0202-a0cf-d2ed571f4f96",
+          "name": "List distributed virtual portgroups",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/distributed-virtual-portgroups?size=10&cursor={{cursor}}&start_time={{start_time}}&end_time={{end_time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "distributed-virtual-portgroups"
+              ],
+              "query": [
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "cursor",
+                  "value": "{{cursor}}"
+                },
+                {
+                  "key": "start_time",
+                  "value": "{{start_time}}"
+                },
+                {
+                  "key": "end_time",
+                  "value": "{{end_time}}"
+                }
+              ]
+            },
+            "description": "List distributed virtual portgroups"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "33be7755-bb10-ae4c-f04d-7a49698b4c5e",
+          "name": "Show distributed virtual portgroup details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/distributed-virtual-portgroups/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "distributed-virtual-portgroups",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Show distributed virtual portgroup details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "559d7409-3bfa-6b04-0124-c9e695e881d0",
+          "name": "Get names for entities",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/entities/names",
+            "description": "Get names for entities.Limit of 1000 entities in a single request."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "aafe896c-3f69-2466-993e-9c6dac6bf47e",
+          "name": "Get name of an entity",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/entities/names/:id?time={{time}}",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "entities",
+                "names",
+                ":id"
+              ],
+              "query": [
+                {
+                  "key": "time",
+                  "value": "{{time}}"
+                }
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Get name of an entity"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "6fc3e7b2-d5e4-2661-e4ff-5bb154fb96aa",
+      "name": "groups",
+      "description": "Folder for groups",
+      "item": [
+        {
+          "_postman_id": "6bbd70b3-9c30-2ebf-885f-14d4fe30400e",
+          "name": "List applications",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "NetworkInsight {{token}}"
+              }
+            ],
+            "body": {},
+            "url": "https://{{address}}/api/ni/groups/applications",
+            "description": "List applications"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b659d220-0169-2724-ff57-834707945da5",
+          "name": "Create an application",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/groups/applications",
+            "description": "Application is a group of tiers. A tier is a group of virtual machines based on membership criteria. Tiers are bound to single\napplication. An application name is unique and should not conflict with another application name."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "e68ae284-7989-d6f3-1cb1-04e0aa644d43",
+          "name": "Show application details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "NetworkInsight {{token}}"
+              }
+            ],
+            "body": {},
+            "url": "https://{{address}}/api/ni/groups/applications/19765:561:1526932373",
+            "description": "Show application details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "9228efeb-6d66-0416-d6e4-09e8a8d61f91",
+          "name": "Delete an application",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/groups/applications/:id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "groups",
+                "applications",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Deleting an application deletes all the tiers of the application along with the application"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "495902df-65df-df8b-d0a2-a404d4b27942",
+          "name": "List tiers of an application",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "NetworkInsight {{token}}"
+              }
+            ],
+            "body": {},
+            "url": "https://{{address}}/api/ni/groups/applications/19765:561:1526932373/tiers",
+            "description": "List tiers of an application"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "5c239a90-99cd-7dc0-444f-9bdc2999db4a",
+          "name": "Create tier in application",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/groups/applications/:id/tiers",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "groups",
+                "applications",
+                ":id",
+                "tiers"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                }
+              ]
+            },
+            "description": "Create a tier of an application by with specified membership criteria. The membership criteria id defined in terms of\nvirtual machines or ip addresses/subnet. Please refer to API Guide on how to construct membership criteria."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "2876d84e-1a8e-f800-4744-d1c062bc7664",
+          "name": "Show tier details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": "https://{{address}}/api/ni/groups/applications/16157:561:2128426714/tiers/19765:562:1862091567",
+            "description": "Show tier details"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "ac7a6404-9705-455c-3a51-0d778d96f2aa",
+          "name": "Delete tier",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {},
+            "url": {
+              "raw": "https://vrni.example.com/api/ni/groups/applications/:id/tiers/:tier-id",
+              "protocol": "https",
+              "host": [
+                "vrni",
+                "example",
+                "com"
+              ],
+              "path": [
+                "api",
+                "ni",
+                "groups",
+                "applications",
+                ":id",
+                "tiers",
+                ":tier-id"
+              ],
+              "variable": [
+                {
+                  "value": "{{id}}",
+                  "id": "id"
+                },
+                {
+                  "value": "{{tier-id}}",
+                  "id": "tier-id"
+                }
+              ]
+            },
+            "description": "Delete tier of an application"
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "b388312c-5df1-4862-7fe6-8d5237e4b1ff",
+          "name": "Show tier details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "NetworkInsight {{token}}"
+              }
+            ],
+            "body": {},
+            "url": "https://{{address}}/api/ni/groups/tiers/19765:562:1862091567",
+            "description": "Show tier details"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "85518646-fa26-6613-5212-be936e302718",
+      "name": "micro-seg",
+      "description": "Folder for micro-seg",
+      "item": [
+        {
+          "_postman_id": "be04b2d5-b804-8d1f-4b77-1780c38df5e6",
+          "name": "Get logical recommended rules",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/micro-seg/recommended-rules",
+            "description": "Get recommended firewall rules based on the flow data gathered by vRealize Network Insight.\nThis API provides service to retrieve recommended rules based on flow traffic that is observed between\ntwo groups OR for a single group based on all the inbound and outboud traffic for that group.\nIn case two groups are provided, both the groups should be of same type.\nCurrently supported groups are Application, Tier, NSXSecurityGroup, EC2SecurityGroup."
+          },
+          "response": []
+        },
+        {
+          "_postman_id": "786d0ea3-e5f4-ece3-5390-4b80a0ee2b99",
+          "name": "Export recommended rules for NSX-V",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/micro-seg/recommended-rules/nsx",
+            "description": "Export recommended firewall rules based on the flow data gathered by vRealize Network Insight in NSX-V compatible\nformat"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "_postman_id": "57614474-7f7b-6b0a-72d5-74900e73d7c2",
+      "name": "search",
+      "description": "Folder for search",
+      "item": [
+        {
+          "_postman_id": "add064fd-ca23-76da-d5f4-2681179003ab",
+          "name": "Search entities",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": "https://vrni.example.com/api/ni/search",
+            "description": "Using search API you can search vRealize Network Insight entities by specifying entity type and filter expression.\nA filter expression is a predicate expression (similar to SQL where clause) used to define the search criteria.\nPlease refer to API Guide on details of how to construct filter expression. A successful search request will return a\nlist of entity ids that matches the search criteria."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
