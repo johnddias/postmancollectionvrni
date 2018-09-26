@@ -119,8 +119,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -5552,8 +5552,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -5574,7 +5574,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "Names Request"
             },
             "url": "https://vrni.example.com/api/ni/entities/names",
             "description": "Get names for entities.Limit of 1000 entities in a single request."
@@ -5616,8 +5616,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -5719,8 +5719,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -5782,8 +5782,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -5839,12 +5839,12 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 },
                 {
-                  "value": "{{tier-id}}",
-                  "id": "tier-id"
+                  "key": "tier-id",
+                  "value": "{{tier-id}}"
                 }
               ]
             },
@@ -5893,7 +5893,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "Recommended Rules Request"
             },
             "url": "https://vrni.example.com/api/ni/micro-seg/recommended-rules",
             "description": "Get recommended firewall rules based on the flow data gathered by vRealize Network Insight.\nThis API provides service to retrieve recommended rules based on flow traffic that is observed between\ntwo groups OR for a single group based on all the inbound and outboud traffic for that group.\nIn case two groups are provided, both the groups should be of same type.\nCurrently supported groups are Application, Tier, NSXSecurityGroup, EC2SecurityGroup."
@@ -5913,7 +5913,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "NSX Recommended Rules Request"
             },
             "url": "https://vrni.example.com/api/ni/micro-seg/recommended-rules/nsx",
             "description": "Export recommended firewall rules based on the flow data gathered by vRealize Network Insight in NSX-V compatible\nformat"
@@ -5940,7 +5940,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "Search Request"
             },
             "url": "https://vrni.example.com/api/ni/search",
             "description": "Using search API you can search vRealize Network Insight entities by specifying entity type and filter expression.\nA filter expression is a predicate expression (similar to SQL where clause) used to define the search criteria.\nPlease refer to API Guide on details of how to construct filter expression. A successful search request will return a\nlist of entity ids that matches the search criteria."
