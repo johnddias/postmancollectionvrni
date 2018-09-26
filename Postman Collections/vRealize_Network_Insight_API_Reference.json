@@ -1984,7 +1984,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "Add a vSec Checkpoint firewall as data source"
             },
             "url": "https://vrni.example.com/api/ni/data-sources/checkpoint-firewalls",
             "description": "Add checkpoint firewall as data source"
@@ -2020,8 +2020,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
