@@ -1162,8 +1162,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -1201,8 +1201,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             }
@@ -1239,8 +1239,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             }
@@ -1277,8 +1277,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -1319,8 +1319,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -1358,7 +1358,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "Add a cisco switch as datasource"
             },
             "url": "https://vrni.example.com/api/ni/data-sources/juniper-switches",
             "description": "Add switch Datasource"
@@ -1394,8 +1394,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -1435,8 +1435,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -1473,8 +1473,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
