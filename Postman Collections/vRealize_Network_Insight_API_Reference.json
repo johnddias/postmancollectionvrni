@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "vRealize Network Insight API Reference",
     "_postman_id": "0c0c79a0-1545-d4c0-5081-f7406c653936",
+    "name": "vRealize Network Insight API Reference",
     "description": "vRealize Network Insight API Reference",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
@@ -189,7 +189,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "VCenter Credentials"
             },
             "url": "https://vrni.example.com/api/ni/data-sources/vcenters",
             "description": "Add a vcenter data source. User must provide one of ip or fqdn field in the request body.\nAppropriate proxy id is retrieved from infra/nodes URL to select the proxy node."
@@ -225,8 +225,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -266,8 +266,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -304,8 +304,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -1205,8 +1205,7 @@
                   "id": "id"
                 }
               ]
-            },
-            "description": ""
+            }
           },
           "response": []
         },
@@ -1244,8 +1243,7 @@
                   "id": "id"
                 }
               ]
-            },
-            "description": ""
+            }
           },
           "response": []
         },
