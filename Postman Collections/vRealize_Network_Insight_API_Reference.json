@@ -5366,8 +5366,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -5459,8 +5459,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -5552,8 +5552,8 @@
               ],
               "variable": [
                 {
-                  "value": "{{id}}",
-                  "id": "id"
+                  "key": "id",
+                  "value": "{{id}}"
                 }
               ]
             },
@@ -5574,7 +5574,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "Names Request"
             },
             "url": "https://vrni.example.com/api/ni/entities/names",
             "description": "Get names for entities.Limit of 1000 entities in a single request."
