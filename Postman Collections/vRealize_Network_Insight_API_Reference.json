@@ -1671,7 +1671,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "Add a cisco switch as datasource"
+              "raw": ""
             },
             "url": "https://vrni.example.com/api/ni/data-sources/arista-switches",
             "description": "Add arista switch data source"
@@ -1707,8 +1707,8 @@
               ],
               "variable": [
                 {
-                  "key": "id",
-                  "value": "{{id}}"
+                  "value": "{{id}}",
+                  "id": "id"
                 }
               ]
             },
@@ -1748,8 +1748,8 @@
               ],
               "variable": [
                 {
-                  "key": "id",
-                  "value": "{{id}}"
+                  "value": "{{id}}",
+                  "id": "id"
                 }
               ]
             },
@@ -1786,8 +1786,8 @@
               ],
               "variable": [
                 {
-                  "key": "id",
-                  "value": "{{id}}"
+                  "value": "{{id}}",
+                  "id": "id"
                 }
               ]
             },
@@ -1825,8 +1825,8 @@
               ],
               "variable": [
                 {
-                  "key": "id",
-                  "value": "{{id}}"
+                  "value": "{{id}}",
+                  "id": "id"
                 }
               ]
             },
@@ -1864,8 +1864,8 @@
               ],
               "variable": [
                 {
-                  "key": "id",
-                  "value": "{{id}}"
+                  "value": "{{id}}",
+                  "id": "id"
                 }
               ]
             },
