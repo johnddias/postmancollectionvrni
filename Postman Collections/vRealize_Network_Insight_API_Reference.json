@@ -2761,7 +2761,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": ""
+              "raw": "Add a switch as datasource"
             },
             "url": "https://vrni.example.com/api/ni/data-sources/hpvc-managers",
             "description": "Add hpvc manager data source"
